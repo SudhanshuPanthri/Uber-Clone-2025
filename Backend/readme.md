@@ -149,3 +149,97 @@ Authenticates a user with the provided email and password.
   "password": "password123"
 }
 ```
+
+## GET /users/profile
+
+Gets the profile of the authenticated user.
+
+### Description
+
+Retrieves the profile information of the currently authenticated user.
+
+### Responses
+
+- **200 OK**
+
+  - Description: User profile retrieved successfully.
+  - Body:
+
+    ```json
+    {
+      "_id": "string",
+      "fullname": {
+        "firstname": "string",
+        "lastname": "string"
+      },
+      "email": "string"
+      // ...existing fields...
+    }
+    ```
+
+- **401 Unauthorized**
+
+  - Description: User is not authenticated.
+  - Body:
+
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+- **500 Internal Server Error**
+
+  - Description: An unexpected error occurred.
+
+### Example Request
+
+```json
+{
+  "token": "string"
+}
+```
+
+## GET /users/logout
+
+Logs out the authenticated user.
+
+### Description
+
+Logs out the currently authenticated user by clearing the authentication token.
+
+### Responses
+
+- **200 OK**
+
+  - Description: User logged out successfully.
+  - Body:
+
+    ```json
+    {
+      "message": "Logged out successfully"
+    }
+    ```
+
+- **401 Unauthorized**
+
+  - Description: User is not authenticated.
+  - Body:
+
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+- **500 Internal Server Error**
+
+  - Description: An unexpected error occurred.
+
+### Example Request
+
+```json
+{
+  "token": "string"
+}
+```
