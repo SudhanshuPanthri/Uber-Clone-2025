@@ -415,7 +415,7 @@ Authenticates a captain with the provided email and password.
   "email": "john.doe@example.com",
   "password": "password123"
 }
-```
+
 
 ## Captain Model
 
@@ -469,5 +469,108 @@ Represents a captain in the system.
     "latitude": 12.345678,
     "longitude": 98.765432
   }
+}
+```
+```
+
+## GET /captains/profile
+
+Gets the profile of the authenticated captain.
+
+### Description
+
+Retrieves the profile information of the currently authenticated captain.
+
+### Responses
+
+- **200 OK**
+
+  - Description: Captain profile retrieved successfully.
+  - Body:
+
+    ```json
+    {
+      "captain": {
+        "_id": "string",
+        "fullname": {
+          "firstname": "string",
+          "lastname": "string"
+        },
+        "email": "string",
+        "vehicle": {
+          "color": "string",
+          "plate": "string",
+          "capacity": "number",
+          "vehicleType": "string"
+        }
+        // ...existing fields...
+      }
+    }
+    ```
+
+- **401 Unauthorized**
+
+  - Description: Captain is not authenticated.
+  - Body:
+
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+- **500 Internal Server Error**
+
+  - Description: An unexpected error occurred.
+
+### Example Request
+
+```json
+{
+  "token": "string"
+}
+```
+
+## GET /captains/logout
+
+Logs out the authenticated captain.
+
+### Description
+
+Logs out the currently authenticated captain by clearing the authentication token.
+
+### Responses
+
+- **200 OK**
+
+  - Description: Captain logged out successfully.
+  - Body:
+
+    ```json
+    {
+      "message": "Logged out successfully"
+    }
+    ```
+
+- **401 Unauthorized**
+
+  - Description: Captain is not authenticated.
+  - Body:
+
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+- **500 Internal Server Error**
+
+  - Description: An unexpected error occurred.
+
+### Example Request
+
+```json
+{
+  "token": "string"
 }
 ```
