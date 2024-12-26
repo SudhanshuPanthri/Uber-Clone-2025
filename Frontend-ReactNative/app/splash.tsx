@@ -37,16 +37,16 @@ export default function Splash() {
             <View style={{ flex: 8 }}>
                 <ImageBackground source={image} resizeMode='cover' style={{ flex: 1 }}>
                     {/* <Text style={styles.text}>Inside</Text> */}
-                    <Image source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" }} style={{ width: 85, height: 30, marginTop: 35, marginLeft: 15, tintColor: "#fff" }} />
+                    <Image source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" }} style={{ width: 85, height: 30, marginTop: 35, marginLeft: 15 }} />
                 </ImageBackground>
             </View>
             <View style={{ flex: 2, backgroundColor: 'white', padding: 10 }}>
                 <Text style={{ fontSize: 28, textAlign: "left", fontFamily: "Poppins_600SemiBold", marginTop: 15 }}>Get Started with Uber</Text>
                 <TouchableOpacity onPress={() => {
-                    router.replace("/sign-in");
+                    router.replace('/user-login');
                 }}>
                     <View style={styles.buttonWrapper}>
-                        <Text style={styles.button}>Sign In</Text>
+                        <Text style={styles.button}>Continue</Text>
                         <AntDesign name="right" size={20} color="white" />
                     </View>
                 </TouchableOpacity>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#000",
-        flexDirection:"row",
+        flexDirection: "row",
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         borderBottomLeftRadius: 10,
@@ -75,6 +75,6 @@ const styles = StyleSheet.create({
         fontFamily: "Poppins_500Medium",
         borderRadius: 16,
         color: "#fff",
-        width:"90%",
+        width: "90%",
     }
 });
