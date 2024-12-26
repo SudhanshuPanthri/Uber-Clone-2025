@@ -1,7 +1,7 @@
-const CaptainLogin=()=>{
-    return(
+const CaptainLogin = () => {
+    return (
         <div>
-            <h1>User Login</h1>
+            <h1>Captain Login</h1>
         </div>
     )
 }
