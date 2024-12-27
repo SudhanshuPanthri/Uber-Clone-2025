@@ -23,25 +23,30 @@ import {
 } from '@expo-google-fonts/poppins';
 
 import { useSession } from '../ctx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
-// import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({});
   let [fontsLoaded] = useFonts({
     Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, Poppins_800ExtraBold, Poppins_900Black
   });
 
   const { signIn } = useSession();
+  console.log(email, password);
 
-  const onSubmit = () => {
+  const onSubmit = ({ email, password }: { email: string; password: string }) => {
+    const data = { email: email, password: password };
+    setUserData(data);
+    console.log(userData);
     setEmail("");
     setPassword("");
     signIn();
     router.replace("/");
   }
+
   return (
     <View>
       <View>
@@ -50,20 +55,26 @@ export default function UserLogin() {
           <Text style={styles.label}>What's your Email ?</Text>
           <TextInput
             style={styles.input}
-            onChangeText={setEmail}
             value={email}
+            onChangeText={(text) => setEmail(text)}
             placeholder='abc@example.com'
+            autoCapitalize='none'
+            autoCorrect={false}
+            keyboardType='email-address'
           />
           <Text style={styles.label1}>Password</Text>
           <TextInput
             style={styles.input}
-            onChangeText={setPassword}
             value={password}
+            onChangeText={(text) => setPassword(text)}
             placeholder='Enter Password'
+            secureTextEntry={true}
+            autoCapitalize='none'
+            autoCorrect={false}
           />
         </View>
       </View>
-      <TouchableOpacity style={styles.button} onPress={onSubmit}>
+      <TouchableOpacity style={styles.button} onPress={() => onSubmit({ email, password })}>
         <Text style={{ color: "#fff", fontSize: 18 }}>Login</Text>
         <AntDesign name="right" size={20} color="white" />
       </TouchableOpacity>
