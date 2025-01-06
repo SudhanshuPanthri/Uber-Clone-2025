@@ -25,25 +25,21 @@ import {
 import { useSession } from '../ctx';
 import { useState, useEffect } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useAuth } from '@/context/ctx';
 
 export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState({});
   let [fontsLoaded] = useFonts({
     Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, Poppins_800ExtraBold, Poppins_900Black
   });
 
-  const { signIn } = useSession();
-  console.log(email, password);
+  const { signInUser } = useAuth();
 
   const onSubmit = ({ email, password }: { email: string; password: string }) => {
     const data = { email: email, password: password };
-    setUserData(data);
-    console.log(userData);
-    setEmail("");
-    setPassword("");
-    signIn();
+    signInUser(data);
+    console.log(data);
     router.replace("/");
   }
 
@@ -79,7 +75,7 @@ export default function UserLogin() {
         <AntDesign name="right" size={20} color="white" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => {
-        router.replace('/');
+        router.replace('/user-signup');
       }}>
         <Text style={{ color: "#fff", fontSize: 18 }}>Create New Account (User)</Text>
         <AntDesign name="right" size={20} color="white" />
@@ -99,17 +95,17 @@ export default function UserLogin() {
 const styles = StyleSheet.create({
   input: {
     backgroundColor: "#eeeeee",
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: "Poppins_400Regular",
-    padding: 15,
+    padding: 12,
   },
   label: {
-    fontSize: 26,
+    fontSize: 22,
     fontFamily: "Poppins_500Medium",
     marginBottom: 10
   },
   label1: {
-    fontSize: 26,
+    fontSize: 22,
     fontFamily: "Poppins_500Medium",
     marginTop: 20,
     marginBottom: 10

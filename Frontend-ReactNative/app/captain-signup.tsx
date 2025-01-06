@@ -25,25 +25,24 @@ import {
 import { useSession } from '../ctx';
 import { useState, useEffect } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useAuth } from '@/context/ctx';
 
-export default function CaptainLogin() {
+export default function CaptainSignUp() {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [captainData, setCaptainData] = useState({});
+    const [confirmPassword, setConfirmPassword] = useState("");
     let [fontsLoaded] = useFonts({
         Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, Poppins_800ExtraBold, Poppins_900Black
     });
 
-    const { signIn } = useSession();
-    console.log(email, password);
+    const { signInUser } = useAuth();
 
     const onSubmit = ({ email, password }: { email: string; password: string }) => {
         const data = { email: email, password: password };
-        setCaptainData(data);
-        console.log(captainData);
-        setEmail("");
-        setPassword("");
-        signIn();
+        signInUser(data);
+        console.log(data);
         router.replace("/");
     }
 
@@ -52,6 +51,25 @@ export default function CaptainLogin() {
             <View>
                 <Image source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" }} style={{ width: 85, height: 30, marginTop: 45, marginLeft: 15 }} />
                 <View style={{ padding: 10, marginTop: 50 }}>
+                    <Text style={styles.label}>What's your Name ?</Text>
+                    <View style={{ display: 'flex', flexDirection: 'row', gap: 20, marginBottom: 12 }}>
+                        <TextInput
+                            style={styles.inputsm}
+                            value={firstName}
+                            onChangeText={(text) => setFirstName(text)}
+                            placeholder='First Name'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                        />
+                        <TextInput
+                            style={styles.inputsm}
+                            value={lastName}
+                            onChangeText={(text) => setLastName(text)}
+                            placeholder='Last Name'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                        />
+                    </View>
                     <Text style={styles.label}>What's your Email ?</Text>
                     <TextInput
                         style={styles.input}
@@ -72,21 +90,31 @@ export default function CaptainLogin() {
                         autoCapitalize='none'
                         autoCorrect={false}
                     />
+                    <Text style={styles.label1}>Confirm Password</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={password}
+                        onChangeText={(text) => setConfirmPassword(text)}
+                        placeholder='Confirm Password'
+                        secureTextEntry={true}
+                        autoCapitalize='none'
+                        autoCorrect={false}
+                    />
                 </View>
             </View>
             <TouchableOpacity style={styles.button} onPress={() => onSubmit({ email, password })}>
-                <Text style={{ color: "#fff", fontSize: 18 }}>Login</Text>
+                <Text style={{ color: "#fff", fontSize: 18 }}>Sign Up</Text>
                 <AntDesign name="right" size={20} color="white" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => {
-                router.replace('/captain-signup');
+                router.replace('/user-login');
             }}>
-                <Text style={{ color: "#fff", fontSize: 18 }}>Create New Account (Captain)</Text>
+                <Text style={{ color: "#fff", fontSize: 18 }}>Already have an account</Text>
                 <AntDesign name="right" size={20} color="white" />
             </TouchableOpacity>
             <View>
                 <TouchableOpacity style={styles.button1} onPress={() => {
-                    router.replace('/user-login');
+                    router.replace('/captain-login');
                 }}>
                     <Text style={{ color: "#fff", fontSize: 18 }}>Sign in as User</Text>
                     <AntDesign name="car" size={20} color="white" />
@@ -99,9 +127,15 @@ export default function CaptainLogin() {
 const styles = StyleSheet.create({
     input: {
         backgroundColor: "#eeeeee",
-        fontSize: 16,
+        fontSize: 18,
         fontFamily: "Poppins_400Regular",
-        padding: 15,
+        padding: 12,
+    },
+    inputsm: {
+        backgroundColor: "#eeeeee",
+        fontSize: 18,
+        fontFamily: "Poppins_400Regular",
+        width: "48%"
     },
     label: {
         fontSize: 22,
@@ -126,7 +160,7 @@ const styles = StyleSheet.create({
         gap: 10
     },
     button1: {
-        backgroundColor: "#df622d",
+        backgroundColor: "#10b461",
         padding: 15,
         marginHorizontal: 10,
         marginVertical: 30,

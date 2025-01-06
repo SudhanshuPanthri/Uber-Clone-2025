@@ -31,7 +31,7 @@ const CaptainLogin = () => {
                     <input type="password" className="bg-[#eeeeee] mb-7 rounded px-4 py-2 border w-full text-lg placeholder:text-base" name="" id="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <button className="bg-[#111] text-white font-semibold mb-2 rounded px-4 py-2 w-full text-lg" onClick={() => console.log(`${email} ${password}`)}>Login</button>
                 </form>
-                <span className="mr-2">Join as a fleet ?</span><Link to="/user/signup" className="text-blue-600">Register as captain</Link>
+                <span className="mr-2">Join as a fleet ?</span><Link to="/captain/signup" className="text-blue-600">Register as captain</Link>
             </div>
             <div>
                 <Link to="/user/login" className="flex w-full items-center justify-center bg-[#df622d] text-white font-semibold mb-10 rounded px-4 py-2 w-full text-lg">Sign in as User</Link>
